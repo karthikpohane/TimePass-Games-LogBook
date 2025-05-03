@@ -4,7 +4,8 @@
 
 **TimePass-Games-LogBook** is a full-stack web application designed to manage a collection of games. It allows users to **Create**, **Read**, **Update**, and **Delete** (CRUD) game entries using a simple and user-friendly interface.
 
-The application is split into a **React** frontend and an **Express** + **MongoDB** backend, providing a seamless experience for managing game data. This project is structured to demonstrate practical understanding of full-stack development, RESTful APIs, component architecture, and database operations.
+The application is divided into a **React** frontend and an **Express** + **MongoDB** backend. Additionally, it now includes **Swagger API documentation** for easily exploring and testing the backend endpoints.
+
 ---
 
 ## ✨ Key Features
@@ -14,6 +15,7 @@ The application is split into a **React** frontend and an **Express** + **MongoD
 * **Edit Existing Game**: Update details of any previously added game.
 * **Delete Game**: Remove games permanently from the database.
 * **Search Games**: Quickly filter games by name.
+* **Interactive API Docs**: Explore the API through an integrated Swagger UI.
 
 ---
 
@@ -21,45 +23,48 @@ The application is split into a **React** frontend and an **Express** + **MongoD
 
 ### 🔹 Frontend
 
-* **React** – Building component-based UI
-* **Axios** – Handling API requests
-* **CSS** – Styling the UI
+* **React** – Component-based UI
+* **Axios** – Making API requests
+* **CSS** – Styling and layout
 
 ### 🔹 Backend
 
-* **Node.js + Express** – Building RESTful APIs
-* **MongoDB + Mongoose** – Data persistence and modeling
-* **Cors** – Managing cross-origin requests
+* **Node.js + Express** – RESTful API server
+* **MongoDB + Mongoose** – NoSQL database & data modeling
+* **Swagger** – API documentation and testing interface
+* **Cors** – Cross-origin resource sharing
 
 ### 🔹 Dev Tools
 
-* **dotenv** – Managing environment variables
-* **nodemon** – Auto-reloading backend during development
+* **dotenv** – Manage environment variables
+* **nodemon** – Auto-restart development server
 
 ---
 
 ## 🔍 How It Works
 
-The application consists of two main parts: the **frontend** and the **backend**.
-
 ### 🖼️ Frontend
 
 * Located in the `frontend/` folder.
-* Built with **React** and organized into reusable components:
+* Composed of modular React components:
 
-  * `GameForm.jsx`: Form for adding/editing games.
-  * `GameList.jsx`: Displays the list of games.
-  * `GameSearch.jsx`: Search bar to filter games.
-* The main app is rendered from `Home.jsx` via `App.jsx`.
-* Axios is used to send API requests to the backend.
+  * `GameForm.jsx`: Add or edit games.
+  * `GameList.jsx`: View all games.
+  * `GameSearch.jsx`: Search for games.
+* Uses **Axios** to interact with the backend.
 
 ### 🛠️ Backend
 
 * Located in the `backend/` folder.
-* Built using **Express.js**, with routes and controllers separated for scalability.
-* **Mongoose** connects the app to a **MongoDB** database and defines the schema in `gameModel.js`.
-* Routes (`/api/games`) handle all game operations.
-* Centralized error handling is provided via custom middleware.
+* Built with Express and Mongoose.
+* Uses **Swagger** to auto-generate and serve interactive API documentation.
+* Game-related logic resides in:
+
+  * `gameController.js` for core logic
+  * `gameRoutes.js` for route setup
+* All API documentation is available via Swagger at:
+
+  👉 **[http://localhost:5000/api-docs](http://localhost:5000/api-docs)**
 
 ---
 
@@ -68,16 +73,17 @@ The application consists of two main parts: the **frontend** and the **backend**
 ```
 TimePass-Games-LogBook/
 ├── backend/
-│   ├── config/db.js               # MongoDB connection
+│   ├── config/db.js
 │   ├── controllers/gameController.js
 │   ├── middleware/errorHandler.js
 │   ├── models/gameModel.js
 │   ├── routes/gameRoutes.js
-│   ├── index.js                   # Server entry point
-│   └── .env                       # Environment config (MONGO_URI, PORT)
+│   ├── index.js
+│   └── .env
 │
 ├── frontend/
-│   ├── public/index.html
+│   ├── public/
+│   │   └── index.html
 │   └── src/
 │       ├── api/axios.js
 │       ├── components/
@@ -88,7 +94,6 @@ TimePass-Games-LogBook/
 │       ├── App.jsx
 │       ├── index.js
 │       └── index.css
-│
 └── README.md
 ```
 
@@ -96,63 +101,64 @@ TimePass-Games-LogBook/
 
 ## 🌐 API Overview
 
-The backend exposes the following RESTful endpoints:
+The API is documented and testable via Swagger at:
 
-### 1. `GET /api/games`
+📘 **[http://localhost:5000/api-docs](http://localhost:5000/api-docs)**
 
-Returns all games from the database.
+### REST Endpoints
 
-### 2. `GET /api/games/:id`
+| Method | Endpoint                     | Description          |
+| ------ | ---------------------------- | -------------------- |
+| GET    | `/api/games`                 | Get all games        |
+| GET    | `/api/games/:id`             | Get a game by ID     |
+| POST   | `/api/games`                 | Add a new game       |
+| PUT    | `/api/games/:id`             | Update a game by ID  |
+| DELETE | `/api/games/:id`             | Delete a game by ID  |
+| GET    | `/api/games/search?name=xyz` | Search games by name |
 
-Returns a single game by its ID.
-
-### 3. `POST /api/games`
-
-Creates a new game.
-
-#### Request Body:
+Example `POST` request:
 
 ```json
 {
-  "name": "Game Name",
-  "url": "https://game-url.com",
-  "author": "Author Name",
-  "publishedDate": "YYYY-MM-DD"
+  "name": "Chess Online",
+  "url": "https://play.chess.com",
+  "author": "Chess Inc.",
+  "publishedDate": "2023-09-01"
 }
 ```
 
-### 4. `PUT /api/games/:id`
+---
 
-Updates a game by its ID.
+## 📘 Swagger Documentation Setup
 
-### 5. `DELETE /api/games/:id`
+Swagger is integrated using `swagger-jsdoc` and `swagger-ui-express`.
 
-Deletes a game by its ID.
+Access the API docs:
 
-### 6. `GET /api/games/search?name=gameName`
+🔗 **[http://localhost:5000/api-docs](http://localhost:5000/api-docs)**
 
-Searches games by their name.
+Located inside `gameRoutes.js`, Swagger annotations are used to auto-generate documentation from route comments.
 
 ---
 
 ## ❗ Error Handling
 
-The backend handles common error scenarios:
+The backend handles common errors gracefully:
 
-* **404 Not Found**: If a game with the given ID doesn't exist.
-* **500 Server Error**: For unexpected failures or invalid operations.
-
-All errors return meaningful messages to help with debugging or user feedback.
+* **404 Not Found** – Game not found
+* **500 Internal Server Error** – Database or server error
+* Errors are returned with informative JSON messages for easy debugging.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+Licensed under the [MIT License](LICENSE).
 
 ---
 
-If you have any questions or feedback regarding the project, feel free to reach out:
+## 📬 Contact
 
-**Karthik Pohane** – [kartikpohane0612@gmail.com](mailto:kartikpohane0612@gmail.com)
+**Karthik Pohane**
+📧 [kartikpohane0612@gmail.com](mailto:kartikpohane0612@gmail.com)
 
