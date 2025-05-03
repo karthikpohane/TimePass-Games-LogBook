@@ -32,3 +32,14 @@ export const deleteGame = async (req, res) => {
     res.status(404).json({ message: 'Game not found' });
   }
 };
+
+export const searchGameByName = async (req, res) => {
+  const { name } = req.query;
+  try {
+    const games = await Game.find({ name: new RegExp(name, 'i') }); // 'i' for case-insensitive
+    res.json(games);
+  } catch (error) {
+    res.status(500).json({ message: 'Error searching games' });
+  }
+};
+

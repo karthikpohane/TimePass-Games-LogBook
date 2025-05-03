@@ -5,10 +5,12 @@ import {
   createGame,
   updateGame,
   deleteGame,
+  searchGameByName,
 } from '../controllers/gameController.js';
 
 const router = express.Router();
 
+router.get('/search', searchGameByName);
 router.get('/', getAllGames);
 router.get('/:id', getGameById);
 router.post('/', createGame);
