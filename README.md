@@ -1,4 +1,4 @@
-<img src="https://github.com/user-attachments/assets/252d96b1-f59d-4727-9669-a126cce2c599" alt="timepass-games-logo" width="200"/>
+![image](https://github.com/user-attachments/assets/666318bc-3d70-48f4-9939-a44493a1fc64)
 
 # TimePass-Games-LogBook
 
