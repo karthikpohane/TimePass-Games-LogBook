@@ -2,7 +2,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js'; // Database connection
-import gameRoutes from './routes/gameRoutes.js'; // Game-related routes
+import { gameRoutes, swaggerDocs, swaggerUi } from './routes/gameRoutes.js'; // Game-related routes + Swagger
 import { errorHandler } from './middleware/errorHandler.js'; // Custom error handler
 import cors from 'cors'; // Middleware for enabling Cross-Origin Requests
 
@@ -23,6 +23,9 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
+// Swagger documentation route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 // API route for game-related actions
 app.use('/api/games', gameRoutes);
 
@@ -31,4 +34,7 @@ app.use(errorHandler);
 
 // Start the server and listen on the specified port
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`);
+});
