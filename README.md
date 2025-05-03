@@ -1,12 +1,8 @@
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <h1 style="margin: 0;">TimePass-Games-LogBook</h1>
-  <img src="https://github.com/user-attachments/assets/252d96b1-f59d-4727-9669-a126cce2c599" alt="timepass-games-logo" width="150"/>
-</div>
+<img src="https://github.com/user-attachments/assets/252d96b1-f59d-4727-9669-a126cce2c599" alt="timepass-games-logo" width="200"/> <p># TimePass-Games-LogBook</p>
 
-<p><strong>TimePass-Games-LogBook</strong> is a full-stack web application designed to manage a collection of games. It allows users to <strong>Create</strong>, <strong>Read</strong>, <strong>Update</strong>, and <strong>Delete</strong> (CRUD) game entries using a simple and user-friendly interface.</p>
+**TimePass-Games-LogBook** is a full-stack web application designed to manage a collection of games. It allows users to **Create**, **Read**, **Update**, and **Delete** (CRUD) game entries using a simple and user-friendly interface.
 
-<p>The application is split into a <strong>React</strong> frontend and an <strong>Express</strong> + <strong>MongoDB</strong> backend, providing a seamless experience for managing game data. This project is structured to demonstrate practical understanding of full-stack development, RESTful APIs, component architecture, and database operations.</p>
-
+The application is split into a **React** frontend and an **Express** + **MongoDB** backend, providing a seamless experience for managing game data. This project is structured to demonstrate practical understanding of full-stack development, RESTful APIs, component architecture, and database operations.
 ---
 
 ## ✨ Key Features
