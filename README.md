@@ -1,5 +1,4 @@
 <img src="https://github.com/user-attachments/assets/252d96b1-f59d-4727-9669-a126cce2c599" alt="timepass-games-logo" width="200"/>
-
 # TimePass-Games-LogBook
 
 **TimePass-Games-LogBook** is a full-stack web application designed to manage a collection of games. It allows users to **Create**, **Read**, **Update**, and **Delete** (CRUD) game entries using a simple and user-friendly interface.
