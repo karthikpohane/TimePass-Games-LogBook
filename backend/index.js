@@ -1,25 +1,34 @@
+// Import necessary modules
 import express from 'express';
 import dotenv from 'dotenv';
-import connectDB from './config/db.js';
-import gameRoutes from './routes/gameRoutes.js';
-import { errorHandler } from './middleware/errorHandler.js';
-import cors from 'cors';
+import connectDB from './config/db.js'; // Database connection
+import gameRoutes from './routes/gameRoutes.js'; // Game-related routes
+import { errorHandler } from './middleware/errorHandler.js'; // Custom error handler
+import cors from 'cors'; // Middleware for enabling Cross-Origin Requests
 
+// Initialize environment variables
 dotenv.config();
+
+// Connect to the database
 connectDB();
 
 const app = express();
 
-// ✅ Now use app
-app.use(cors());
-app.use(express.json());
+// Middleware setup
+app.use(cors()); // Enable Cross-Origin Requests
+app.use(express.json()); // Parse incoming JSON requests
 
+// Root endpoint to check if the API is running
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
+// API route for game-related actions
 app.use('/api/games', gameRoutes);
+
+// Global error handler middleware
 app.use(errorHandler);
 
+// Start the server and listen on the specified port
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
