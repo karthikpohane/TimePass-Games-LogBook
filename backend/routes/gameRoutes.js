@@ -28,7 +28,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:5000',
+        url: 'https://time-pass-games-log-book-backend.vercel.app/',
       },
     ],
   },
