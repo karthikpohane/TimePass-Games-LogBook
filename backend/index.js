@@ -16,8 +16,8 @@ const app = express();
 
 // Middleware setup
 app.use(cors({
-  origin: ['http://localhost:3000/'], // Replace with your actual frontend domain (e.g., Vercel, Netlify)
-  credentials: true, // Only if using cookies/auth
+  origin: ['http://localhost:3000'],  // Make sure your frontend is running at this URL
+  credentials: true,  // Only if using cookies/authentication
 }));
 app.use(express.json()); // Parse incoming JSON requests
 
