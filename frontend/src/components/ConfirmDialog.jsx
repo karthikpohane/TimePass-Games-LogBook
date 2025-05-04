@@ -18,7 +18,7 @@ const ConfirmDialog = ({ open, title, message, onClose, onConfirm }) => {
   const handleConfirm = async () => {
     setIsProcessing(true);
     try {
-      await onConfirm(); // Assume onConfirm returns a Promise
+      await onConfirm(); 
     } finally {
       setIsProcessing(false);
     }
