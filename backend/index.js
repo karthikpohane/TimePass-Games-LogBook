@@ -16,7 +16,7 @@ const app = express();
 
 // Middleware setup
 app.use(cors({
-  origin: ['http://localhost:3000'],  // Make sure your frontend is running at this URL
+  origin: ['https://timepass-games-logbook-frontend.onrender.com'],  // Make sure your frontend is running at this URL
   credentials: true,  // Only if using cookies/authentication
 }));
 app.use(express.json()); // Parse incoming JSON requests
