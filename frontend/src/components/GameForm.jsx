@@ -36,9 +36,13 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
       await axios.post("/games", form);
     }
 
+    handleReset();
+    fetchGames();
+  };
+
+  const handleReset = () => {
     setForm({ name: "", url: "", author: "", publishedDate: "" });
     setSelectedGame(null);
-    fetchGames();
   };
 
   return (
@@ -141,23 +145,44 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
             }}
           />
 
-          <Button
-            variant="contained"
-            type="submit"
-            sx={{
-              backgroundColor: "#4CAF50",
-              color: "#fff",
-              borderRadius: "5px",
-              padding: "6px 16px",
-              fontSize: "14px",
-              minWidth: "100px",
-              "&:hover": {
-                backgroundColor: "#45a049",
-              },
-            }}
-          >
-            {selectedGame ? "Update" : "Add"} Game
-          </Button>
+          <Box display="flex" justifyContent="center" gap={2}>
+            <Button
+              variant="contained"
+              type="submit"
+              sx={{
+                backgroundColor: "#4CAF50",
+                color: "#fff",
+                borderRadius: "5px",
+                padding: "6px 16px",
+                fontSize: "14px",
+                minWidth: "100px",
+                "&:hover": {
+                  backgroundColor: "#45a049",
+                },
+              }}
+            >
+              {selectedGame ? "Update" : "Add"} Game
+            </Button>
+
+            <Button
+              variant="outlined"
+              onClick={handleReset}
+              sx={{
+                borderColor: "#4CAF50",
+                color: "#4CAF50",
+                borderRadius: "5px",
+                padding: "6px 16px",
+                fontSize: "14px",
+                minWidth: "100px",
+                "&:hover": {
+                  borderColor: "#45a049",
+                  color: "#45a049",
+                },
+              }}
+            >
+              Reset
+            </Button>
+          </Box>
         </Box>
       </CardContent>
     </Card>
@@ -165,3 +190,4 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
 };
 
 export default GameForm;
+
