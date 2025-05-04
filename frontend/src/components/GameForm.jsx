@@ -1,10 +1,15 @@
-// src/components/GameForm.jsx
-
 import { useState, useEffect } from 'react';
 import axios from '../api/axios';
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Card,
+  CardContent,
+} from '@mui/material';
 
 const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
-  // State to hold form data, initialized with empty values
   const [form, setForm] = useState({
     name: '',
     url: '',
@@ -12,67 +17,148 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
     publishedDate: '',
   });
 
-  // Effect hook to pre-fill the form if a game is selected for editing
   useEffect(() => {
-    if (selectedGame) setForm(selectedGame); // Pre-fill form fields with the selected game data
+    if (selectedGame) setForm(selectedGame);
   }, [selectedGame]);
 
-  // Handle input changes and update form state
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission for both creating and updating games
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // If a game is selected, we update it, otherwise we create a new game
     if (selectedGame) {
-      await axios.put(`/games/${selectedGame._id}`, form); // Update existing game
+      await axios.put(`/games/${selectedGame._id}`, form);
     } else {
-      await axios.post('/games', form); // Create new game
+      await axios.post('/games', form);
     }
 
-    // Reset the form after submission
     setForm({ name: '', url: '', author: '', publishedDate: '' });
-    setSelectedGame(null); // Deselect the selected game
-    fetchGames(); // Refresh the games list
+    setSelectedGame(null);
+    fetchGames();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Input fields for game details */}
-      <input
-        name="name"
-        value={form.name}
-        onChange={handleChange}
-        placeholder="Game Name"
-        required
-      />
-      <input
-        name="url"
-        value={form.url}
-        onChange={handleChange}
-        placeholder="Game URL"
-        required
-      />
-      <input
-        name="author"
-        value={form.author}
-        onChange={handleChange}
-        placeholder="Author"
-        required
-      />
-      <input
-        type="date"
-        name="publishedDate"
-        value={form.publishedDate}
-        onChange={handleChange}
-        required
-      />
-      {/* Submit button with dynamic text based on whether a game is being edited or added */}
-      <button type="submit">{selectedGame ? 'Update' : 'Add'} Game</button>
-    </form>
+    <Card
+      sx={{
+        maxWidth: 600,
+        margin: 'auto',
+        padding: 3,
+        borderRadius: 2,
+        boxShadow: 3,
+      }}
+    >
+      <CardContent>
+        <Typography
+          variant="h6"
+          gutterBottom
+          sx={{ textAlign: 'center', fontSize: '18px' }}
+        >
+          {selectedGame ? 'Update Game' : 'Add New Game'}
+        </Typography>
+
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          gap={1.5}
+          mt={2}
+        >
+          <TextField
+            label="Game Name"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            fullWidth
+            required
+            variant="outlined"
+            sx={{
+              fontSize: '16px',
+              borderRadius: '20px',
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '20px',
+              },
+            }}
+          />
+
+          <TextField
+            label="Game URL"
+            name="url"
+            value={form.url}
+            onChange={handleChange}
+            fullWidth
+            required
+            variant="outlined"
+            sx={{
+              fontSize: '16px',
+              borderRadius: '20px',
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '20px',
+              },
+            }}
+          />
+
+          <TextField
+            label="Author"
+            name="author"
+            value={form.author}
+            onChange={handleChange}
+            fullWidth
+            required
+            variant="outlined"
+            sx={{
+              fontSize: '16px',
+              borderRadius: '20px',
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '20px',
+              },
+            }}
+          />
+
+          <TextField
+            label="Published Date"
+            type="date"
+            name="publishedDate"
+            value={form.publishedDate}
+            onChange={handleChange}
+            fullWidth
+            required
+            variant="outlined"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            sx={{
+              fontSize: '16px',
+              borderRadius: '20px',
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '20px',
+              },
+            }}
+          />
+
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{
+              backgroundColor: '#4CAF50',
+              color: '#fff',
+              borderRadius: '5px',
+              padding: '6px 16px',
+              fontSize: '14px',
+              minWidth: '100px',
+              '&:hover': {
+                backgroundColor: '#45a049',
+              },
+            }}
+          >
+            {selectedGame ? 'Update' : 'Add'} Game
+          </Button>
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 

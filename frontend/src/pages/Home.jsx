@@ -1,125 +1,92 @@
-// src/pages/Home.jsx
+import { useState, useEffect } from "react";
+import axios from "../api/axios";
+import GameForm from "../components/GameForm";
+import GameList from "../components/GameList";
+import GameSearch from "../components/GameSearch";
 
-import { useState, useEffect } from 'react';
-import axios from '../api/axios';
-import GameForm from '../components/GameForm';
-import GameList from '../components/GameList';
+import { Box } from "@mui/material";
 
 const Home = () => {
-  // ================================
-  // State Variables
-  // ================================
-  const [games, setGames] = useState([]);                  // All games list
-  const [selectedGame, setSelectedGame] = useState(null);  // Game selected for editing
-  const [searchTerm, setSearchTerm] = useState('');        // Search input value
-  const [foundGames, setFoundGames] = useState([]);        // Search results
-  const [searchError, setSearchError] = useState('');      // Error message for search
+  const [games, setGames] = useState([]);
+  const [selectedGame, setSelectedGame] = useState(null);
 
-  // ================================
-  // Fetch all games from backend
-  // ================================
+  // Fetch all games on initial load
   const fetchGames = async () => {
     try {
-      const res = await axios.get('/games');
+      const res = await axios.get("/games");
       setGames(res.data);
     } catch (err) {
-      console.error('Error fetching games:', err);
+      console.error("Error fetching games:", err);
     }
   };
 
-  // ================================
-  // Search game(s) by name
-  // ================================
-  const handleSearch = async () => {
-    if (!searchTerm.trim()) return;
-
-    try {
-      const res = await axios.get(`/games/search?name=${searchTerm}`);
-      if (res.data.length > 0) {
-        setFoundGames(res.data);
-        setSearchError('');
-      } else {
-        setFoundGames([]);
-        setSearchError('Game not found');
-      }
-    } catch (err) {
-      setFoundGames([]);
-      setSearchError('Error searching for games');
-    }
-  };
-
-  // ================================
-  // Reset search inputs and results
-  // ================================
-  const handleResetSearch = () => {
-    setSearchTerm('');
-    setFoundGames([]);
-    setSearchError('');
-  };
-
-  // ================================
-  // Fetch all games on initial render
-  // ================================
   useEffect(() => {
     fetchGames();
   }, []);
 
-  // ================================
-  // Render Component
-  // ================================
   return (
-    <div>
-      <h1>Game CRUD App</h1>
-
-      {/* Search Input & Buttons */}
-      <div style={{ marginBottom: '1rem' }}>
-        <input
-          type="text"
-          placeholder="Search by name..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+    <Box sx={{ minHeight: "100vh", overflowY: "auto", paddingBottom: 6 }}>
+      {/* Title at the top */}
+      <Box sx={{ display: "flex", alignItems: "center", padding: 2 }}>
+        <img
+          src="/timepass-games-logo.png" // Correct path from public folder
+          alt="TimePass Games Logo"
+          style={{ height: 100, width: 100}}
         />
-        <button onClick={handleSearch}>Search</button>
-        <button onClick={handleResetSearch}>Reset</button>
-      </div>
+        {/* <Typography variant="h4" gutterBottom>
+          <h4>LogBook</h4>
+        </Typography> */}
+      </Box>
 
-      {/* Display Search Error */}
-      {searchError && (
-        <p style={{ color: 'red' }}>{searchError}</p>
-      )}
+      {/* Game Search centered */}
+      <Box sx={{ padding: 2, textAlign: "center" }}>
+        <GameSearch setGames={setGames} />
+      </Box>
 
-      {/* Search Results */}
-      {foundGames.length > 0 && (
-        <div style={{ border: '1px solid #ccc', padding: '1rem', marginBottom: '1rem' }}>
-          <h3>Search Results ({foundGames.length} found):</h3>
-          <ul>
-            {foundGames.map((game) => (
-              <li key={game._id}>
-                <p>
-                  <strong>{game.name}</strong> by {game.author} 
-                  {' '}(<strong>ID: {game._id}</strong>)
-                  {' '}– <a href={game.url} target="_blank" rel="noreferrer">Visit</a>
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {/* Game List */}
+      <Box sx={{ padding: 2 }}>
+        <GameList
+          games={games}
+          fetchGames={fetchGames}
+          setSelectedGame={setSelectedGame}
+        />
+      </Box>
 
-      {/* Game Creation / Update Form */}
-      <GameForm
-        fetchGames={fetchGames}
-        selectedGame={selectedGame}
-        setSelectedGame={setSelectedGame}
-      />
+      {/* Game Form */}
+      <Box sx={{ padding: 2 }}>
+        <GameForm
+          fetchGames={fetchGames}
+          selectedGame={selectedGame}
+          setSelectedGame={setSelectedGame}
+        />
+      </Box>
 
-      {/* List of All Games */}
-      <GameList
-        games={games}
-        fetchGames={fetchGames}
-        setSelectedGame={setSelectedGame}
-      />
-    </div>
+      {/* Footer */}
+      {/* Footer */}
+      <Box
+        component="footer"
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          width: "100%",
+          bgcolor: "#222",
+          color: "#fff",
+          py: 1.5,
+          textAlign: "center",
+          fontSize: "14px",
+          zIndex: 1000,
+        }}
+      >
+        © {new Date().getFullYear()} TimePass Games. All rights reserved. |{" "}
+        <a
+          href="mailto:kartikpohane0612@gmail.com"
+          style={{ color: "#90caf9", textDecoration: "none" }}
+        >
+          kartikpohane0612@gmail.com
+        </a>
+      </Box>
+    </Box>
   );
 };
 
