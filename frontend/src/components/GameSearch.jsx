@@ -1,7 +1,8 @@
-//This component allows users to search for games by name and displays the results in a list format. 
+//This component allows users to search for games by name and displays the results in a list format.
 // It also includes error handling and loading states.
 import { useState } from "react";
 import axios from "../api/axios";
+import LanguageIcon from "@mui/icons-material/Language";
 import {
   TextField,
   Button,
@@ -12,7 +13,7 @@ import {
   Alert,
   List,
   ListItem,
-  Link,
+  IconButton,
   CircularProgress,
 } from "@mui/material";
 
@@ -26,7 +27,7 @@ const GameSearch = ({ setGames }) => {
     if (!searchTerm.trim()) return;
 
     setIsLoading(true);
-    setSearchError(""); 
+    setSearchError("");
 
     try {
       const res = await axios.get(`/games/search?name=${searchTerm}`);
@@ -174,15 +175,24 @@ const GameSearch = ({ setGames }) => {
                       <Typography variant="subtitle1" fontWeight="bold">
                         {game.name}
                       </Typography>
-                      <Link
+                      <IconButton
+                        edge="end"
                         href={game.url}
                         target="_blank"
                         rel="noreferrer"
-                        underline="hover"
-                        sx={{ fontSize: "14px", ml: 2 }}
+                        sx={{
+                          color: "#4CAF50",
+                          backgroundColor: "#e8f5e9",
+                          borderRadius: "5px",
+                          marginRight: 1,
+                          padding: "6px",
+                          "&:hover": {
+                            backgroundColor: "#c8e6c9",
+                          },
+                        }}
                       >
-                        Visit
-                      </Link>
+                        <LanguageIcon fontSize="small" />
+                      </IconButton>
                     </Box>
 
                     <Typography variant="body2" color="text.secondary" mt={0.5}>
