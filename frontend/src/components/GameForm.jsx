@@ -19,6 +19,8 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
     publishedDate: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false); // <-- New State
+
   useEffect(() => {
     if (selectedGame) setForm(selectedGame);
   }, [selectedGame]);
@@ -29,15 +31,21 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true); // freeze form
 
-    if (selectedGame) {
-      await axios.put(`/games/${selectedGame._id}`, form);
-    } else {
-      await axios.post("/games", form);
+    try {
+      if (selectedGame) {
+        await axios.put(`/games/${selectedGame._id}`, form);
+      } else {
+        await axios.post("/games", form);
+      }
+      handleReset();
+      fetchGames();
+    } catch (error) {
+      console.error("Error saving game:", error);
+    } finally {
+      setIsSubmitting(false); // unfreeze form
     }
-
-    handleReset();
-    fetchGames();
   };
 
   const handleReset = () => {
@@ -80,6 +88,7 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
             onChange={handleChange}
             fullWidth
             required
+            disabled={isSubmitting}
             variant="outlined"
             sx={{
               fontSize: "16px",
@@ -97,6 +106,7 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
             onChange={handleChange}
             fullWidth
             required
+            disabled={isSubmitting}
             variant="outlined"
             sx={{
               fontSize: "16px",
@@ -114,6 +124,7 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
             onChange={handleChange}
             fullWidth
             required
+            disabled={isSubmitting}
             variant="outlined"
             sx={{
               fontSize: "16px",
@@ -132,6 +143,7 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
             onChange={handleChange}
             fullWidth
             required
+            disabled={isSubmitting}
             variant="outlined"
             InputLabelProps={{
               shrink: true,
@@ -149,6 +161,7 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
             <Button
               variant="contained"
               type="submit"
+              disabled={isSubmitting}
               sx={{
                 backgroundColor: "#4CAF50",
                 color: "#fff",
@@ -161,12 +174,20 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
                 },
               }}
             >
-              {selectedGame ? "Update" : "Add"} Game
+              {isSubmitting
+                ? selectedGame
+                  ? "Updating..."
+                  : "Adding..."
+                : selectedGame
+                ? "Update"
+                : "Add"}{" "}
+              Game
             </Button>
 
             <Button
               variant="outlined"
               onClick={handleReset}
+              disabled={isSubmitting}
               sx={{
                 borderColor: "#4CAF50",
                 color: "#4CAF50",
@@ -190,4 +211,5 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
 };
 
 export default GameForm;
+
 
