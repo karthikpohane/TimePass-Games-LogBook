@@ -18,7 +18,6 @@ const app = express();
 // Middleware setup
 app.use(cors({
   origin: ['https://timepass-games-logbook-frontend.onrender.com'], // Allow requests from this origin i.e frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these HTTP methods
   credentials: true,  // Allow credentials (cookies, authorization headers, etc.)
 }));
 app.use(express.json()); 
