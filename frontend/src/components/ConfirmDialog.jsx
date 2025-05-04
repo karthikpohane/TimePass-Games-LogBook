@@ -1,3 +1,5 @@
+//This component is a confirmation dialog that can be used to confirm actions like delete, logout, etc.
+// It uses Material-UI components for styling and layout.
 import { useState } from 'react';
 import {
   Dialog,
