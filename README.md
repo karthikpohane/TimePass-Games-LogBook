@@ -8,10 +8,6 @@ The application is divided into a **React** frontend and an **Express** + **Mong
 
 ---
 
-Sure! Here's a refined **Live Demo** section for your README that includes deployment links, avoids redundant Swagger mentions, and leaves space for your screenshot:
-
----
-
 ## 🚀 Live Demo
 
 The **TimePass-Games-LogBook** is fully deployed and ready to use!
@@ -21,6 +17,8 @@ The **TimePass-Games-LogBook** is fully deployed and ready to use!
 * **Frontend**: [https://timepass-games-logbook-frontend.onrender.com](https://timepass-games-logbook-frontend.onrender.com)
 * **Backend**: [https://timepass-games-logbook-backend.onrender.com](https://timepass-games-logbook-backend.onrender.com)
 * **API Docs (Swagger UI)**: [View Interactive Docs](https://timepass-games-logbook-backend.onrender.com/api-docs)
+![image](https://github.com/user-attachments/assets/25a98c0d-5046-4ad7-90a9-697e2be5d6e8)
+
 
 
 ### 🧩 Database
@@ -108,6 +106,7 @@ TimePass-Games-LogBook/
 │   └── src/
 │       ├── api/axios.js
 │       ├── components/
+│       │   ├── ConfirmDialog.jsx
 │       │   ├── GameForm.jsx
 │       │   ├── GameList.jsx
 │       │   └── GameSearch.jsx
@@ -151,6 +150,8 @@ Example `POST` request:
 ---
 
 ## 📘 Swagger Documentation Setup
+
+![image](https://github.com/user-attachments/assets/af38eb8c-17c6-40d8-a5c5-52d63abd2cc8)
 
 Swagger is integrated using `swagger-jsdoc` and `swagger-ui-express`.
 
