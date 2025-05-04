@@ -8,6 +8,27 @@ The application is divided into a **React** frontend and an **Express** + **Mong
 
 ---
 
+Sure! Here's a refined **Live Demo** section for your README that includes deployment links, avoids redundant Swagger mentions, and leaves space for your screenshot:
+
+---
+
+## 🚀 Live Demo
+
+The **TimePass-Games-LogBook** is fully deployed and ready to use!
+
+### 🌐 Deployed Links
+
+* **Frontend**: [https://timepass-games-logbook-frontend.onrender.com](https://timepass-games-logbook-frontend.onrender.com)
+* **Backend**: [https://timepass-games-logbook-backend.onrender.com](https://timepass-games-logbook-backend.onrender.com)
+* **API Docs (Swagger UI)**: [View Interactive Docs](https://timepass-games-logbook-backend.onrender.com/api-docs)
+
+
+### 🧩 Database
+
+The backend uses **MongoDB Atlas**, a cloud-based NoSQL database service, for storing all game-related data securely and reliably.
+---
+
+
 ## ✨ Key Features
 
 * **Add New Game**: Submit game details such as name, URL, author, and publish date.
@@ -64,7 +85,7 @@ The application is divided into a **React** frontend and an **Express** + **Mong
   * `gameRoutes.js` for route setup
 * All API documentation is available via Swagger at:
 
-  👉 **[http://localhost:5000/api-docs](http://localhost:5000/api-docs)**
+  👉 **[https://timepass-games-logbook-backend.onrender.com/api-docs](https://timepass-games-logbook-backend.onrender.com/api-docs)**
 
 ---
 
@@ -103,7 +124,7 @@ TimePass-Games-LogBook/
 
 The API is documented and testable via Swagger at:
 
-📘 **[http://localhost:5000/api-docs](http://localhost:5000/api-docs)**
+📘 **[https://timepass-games-logbook-backend.onrender.com/api-docs](https://timepass-games-logbook-backend.onrender.com/api-docs)**
 
 ### REST Endpoints
 
@@ -135,7 +156,7 @@ Swagger is integrated using `swagger-jsdoc` and `swagger-ui-express`.
 
 Access the API docs:
 
-🔗 **[http://localhost:5000/api-docs](http://localhost:5000/api-docs)**
+🔗 **[https://timepass-games-logbook-backend.onrender.com/api-docs](https://timepass-games-logbook-backend.onrender.com/api-docs)**
 
 Located inside `gameRoutes.js`, Swagger annotations are used to auto-generate documentation from route comments.
 
