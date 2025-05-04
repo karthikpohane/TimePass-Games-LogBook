@@ -1,3 +1,4 @@
+//This component displays a list of games with options to edit or delete each game.
 import { useState } from 'react';
 import {
   List,
@@ -86,7 +87,7 @@ const GameList = ({ games, fetchGames, setSelectedGame }) => {
             gutterBottom
             sx={{ textAlign: 'center', fontSize: '18px' }}
           >
-            All Games
+            🧩 Available Games
           </Typography>
 
           <List>

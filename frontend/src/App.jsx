@@ -1,11 +1,9 @@
-// src/App.jsx
-
-// Import the Home component, which contains the main functionality of the app
+// This file is part of the React application for the project.
+// It imports the Home component and renders it as the main application component.
 import Home from './pages/Home';
 
 function App() {
   return (
-    // Render the Home component
     <Home />
   );
 }

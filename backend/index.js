@@ -1,25 +1,27 @@
-// Import necessary modules
+// This is the main entry point for the backend server of the Timepass Games Logbook application.
+// It sets up the Express server, connects to the MongoDB database, and defines the API routes.
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js'; // Database connection
-import { gameRoutes, swaggerDocs, swaggerUi } from './routes/gameRoutes.js'; // Game-related routes + Swagger
-import { errorHandler } from './middleware/errorHandler.js'; // Custom error handler
-import cors from 'cors'; // Middleware for enabling Cross-Origin Requests
+import { gameRoutes, swaggerDocs, swaggerUi } from './routes/gameRoutes.js'; // Game routes and Swagger documentation
+import { errorHandler } from './middleware/errorHandler.js'; // Error handling middleware
+import cors from 'cors'; // CORS middleware for handling cross-origin requests
 
-// Initialize environment variables
+// Load environment variables from .env file
 dotenv.config();
 
-// Connect to the database
+// Connect to the MongoDB database
 connectDB();
 
 const app = express();
 
 // Middleware setup
 app.use(cors({
-  origin: ['https://timepass-games-logbook-frontend.onrender.com'],  // Make sure your frontend is running at this URL
-  credentials: true,  // Only if using cookies/authentication
+  origin: ['https://timepass-games-logbook-frontend.onrender.com'], // Allow requests from this origin i.e frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these HTTP methods
+  credentials: true,  // Allow credentials (cookies, authorization headers, etc.)
 }));
-app.use(express.json()); // Parse incoming JSON requests
+app.use(express.json()); 
 
 /**
  * @swagger
@@ -137,7 +139,6 @@ app.use('/api/games', gameRoutes); // Game routes
 
 app.use(errorHandler); // Global error handler
 
-// Start the server and listen on the specified port
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

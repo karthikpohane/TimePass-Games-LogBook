@@ -1,3 +1,6 @@
+//This file contains the controller functions for handling game-related requests.
+// It includes functions to get all games, get a game by ID, create a new game, update an existing game,
+// delete a game, and search for games by name.
 import Game from '../models/gameModel.js';
 
 export const getAllGames = async (req, res) => {
@@ -36,7 +39,7 @@ export const deleteGame = async (req, res) => {
 export const searchGameByName = async (req, res) => {
   const { name } = req.query;
   try {
-    const games = await Game.find({ name: new RegExp(name, 'i') }); // 'i' for case-insensitive
+    const games = await Game.find({ name: new RegExp(name, 'i') }); // Case-insensitive search
     res.json(games);
   } catch (error) {
     res.status(500).json({ message: 'Error searching games' });

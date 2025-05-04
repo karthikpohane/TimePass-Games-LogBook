@@ -1,3 +1,6 @@
+//This file contains the routes for the game-related API endpoints, including CRUD operations and search functionality. 
+// It also includes Swagger documentation for the API.
+// This file contains the routes for the game-related API endpoints, including CRUD operations and search functionality.
 import express from 'express';
 import {
   getAllGames,
@@ -163,5 +166,4 @@ router.put('/:id', updateGame);
  */
 router.delete('/:id', deleteGame);
 
-// Export router and Swagger docs
 export { router as gameRoutes, swaggerDocs, swaggerUi };

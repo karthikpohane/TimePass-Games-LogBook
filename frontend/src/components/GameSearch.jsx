@@ -1,3 +1,5 @@
+//This component allows users to search for games by name and displays the results in a list format. 
+// It also includes error handling and loading states.
 import { useState } from "react";
 import axios from "../api/axios";
 import {
@@ -24,7 +26,7 @@ const GameSearch = ({ setGames }) => {
     if (!searchTerm.trim()) return;
 
     setIsLoading(true);
-    setSearchError(""); // Reset previous error
+    setSearchError(""); 
 
     try {
       const res = await axios.get(`/games/search?name=${searchTerm}`);
@@ -66,7 +68,7 @@ const GameSearch = ({ setGames }) => {
           gutterBottom
           sx={{ textAlign: "center", fontSize: "18px" }}
         >
-          Search Games
+          🕹️ Find Your Game
         </Typography>
 
         <Box
@@ -83,6 +85,7 @@ const GameSearch = ({ setGames }) => {
             required
             onChange={(e) => setSearchTerm(e.target.value)}
             fullWidth
+            disabled={isLoading}
             placeholder="Enter game name"
             sx={{
               fontSize: "16px",
@@ -108,7 +111,7 @@ const GameSearch = ({ setGames }) => {
                   backgroundColor: "#45a049",
                 },
               }}
-              disabled={isLoading} // Disable button while loading
+              disabled={isLoading}
             >
               {isLoading ? (
                 <CircularProgress size={24} sx={{ color: "white" }} />
@@ -120,6 +123,7 @@ const GameSearch = ({ setGames }) => {
             <Button
               variant="outlined"
               onClick={handleResetSearch}
+              disabled={isLoading}
               sx={{
                 borderColor: "#4CAF50",
                 color: "#4CAF50",

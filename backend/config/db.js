@@ -1,3 +1,5 @@
+// This file is responsible for connecting to the MongoDB database using Mongoose.
+// It exports a function that attempts to connect to the database and logs the connection status or error message.
 import mongoose from 'mongoose';
 
 const connectDB = async () => {

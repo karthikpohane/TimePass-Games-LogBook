@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
-import axios from '../api/axios';
+//This component is used to add or update a game in the database. It takes in the selectedGame prop to determine, 
+// if it should be in add or update mode. It also takes in fetchGames to refresh the game list after adding or updating a game.
+import { useState, useEffect } from "react";
+import axios from "../api/axios";
 import {
   TextField,
   Button,
@@ -7,14 +9,14 @@ import {
   Typography,
   Card,
   CardContent,
-} from '@mui/material';
+} from "@mui/material";
 
 const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
   const [form, setForm] = useState({
-    name: '',
-    url: '',
-    author: '',
-    publishedDate: '',
+    name: "",
+    url: "",
+    author: "",
+    publishedDate: "",
   });
 
   useEffect(() => {
@@ -31,10 +33,10 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
     if (selectedGame) {
       await axios.put(`/games/${selectedGame._id}`, form);
     } else {
-      await axios.post('/games', form);
+      await axios.post("/games", form);
     }
 
-    setForm({ name: '', url: '', author: '', publishedDate: '' });
+    setForm({ name: "", url: "", author: "", publishedDate: "" });
     setSelectedGame(null);
     fetchGames();
   };
@@ -43,7 +45,7 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
     <Card
       sx={{
         maxWidth: 600,
-        margin: 'auto',
+        margin: "auto",
         padding: 3,
         borderRadius: 2,
         boxShadow: 3,
@@ -53,9 +55,9 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
         <Typography
           variant="h6"
           gutterBottom
-          sx={{ textAlign: 'center', fontSize: '18px' }}
+          sx={{ textAlign: "center", fontSize: "18px" }}
         >
-          {selectedGame ? 'Update Game' : 'Add New Game'}
+          {selectedGame ? "Update Game" : "Add New Game"}
         </Typography>
 
         <Box
@@ -76,10 +78,10 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
             required
             variant="outlined"
             sx={{
-              fontSize: '16px',
-              borderRadius: '20px',
-              '& .MuiOutlinedInput-root': {
-                borderRadius: '20px',
+              fontSize: "16px",
+              borderRadius: "20px",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "20px",
               },
             }}
           />
@@ -93,10 +95,10 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
             required
             variant="outlined"
             sx={{
-              fontSize: '16px',
-              borderRadius: '20px',
-              '& .MuiOutlinedInput-root': {
-                borderRadius: '20px',
+              fontSize: "16px",
+              borderRadius: "20px",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "20px",
               },
             }}
           />
@@ -110,10 +112,10 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
             required
             variant="outlined"
             sx={{
-              fontSize: '16px',
-              borderRadius: '20px',
-              '& .MuiOutlinedInput-root': {
-                borderRadius: '20px',
+              fontSize: "16px",
+              borderRadius: "20px",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "20px",
               },
             }}
           />
@@ -131,10 +133,10 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
               shrink: true,
             }}
             sx={{
-              fontSize: '16px',
-              borderRadius: '20px',
-              '& .MuiOutlinedInput-root': {
-                borderRadius: '20px',
+              fontSize: "16px",
+              borderRadius: "20px",
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "20px",
               },
             }}
           />
@@ -143,18 +145,18 @@ const GameForm = ({ fetchGames, selectedGame, setSelectedGame }) => {
             variant="contained"
             type="submit"
             sx={{
-              backgroundColor: '#4CAF50',
-              color: '#fff',
-              borderRadius: '5px',
-              padding: '6px 16px',
-              fontSize: '14px',
-              minWidth: '100px',
-              '&:hover': {
-                backgroundColor: '#45a049',
+              backgroundColor: "#4CAF50",
+              color: "#fff",
+              borderRadius: "5px",
+              padding: "6px 16px",
+              fontSize: "14px",
+              minWidth: "100px",
+              "&:hover": {
+                backgroundColor: "#45a049",
               },
             }}
           >
-            {selectedGame ? 'Update' : 'Add'} Game
+            {selectedGame ? "Update" : "Add"} Game
           </Button>
         </Box>
       </CardContent>

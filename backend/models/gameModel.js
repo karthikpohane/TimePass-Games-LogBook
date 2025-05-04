@@ -1,3 +1,5 @@
+// This file defines the Game model for the MongoDB database using Mongoose.
+// It specifies the schema for the Game collection, including fields for name, URL, author, and published date.
 import mongoose from 'mongoose';
 
 const gameSchema = new mongoose.Schema({

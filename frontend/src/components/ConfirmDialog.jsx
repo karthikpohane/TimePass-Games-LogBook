@@ -1,4 +1,4 @@
-// components/ConfirmDialog.tsx
+// This component is a confirmation dialog that appears when the user tries to delete an item.
 import {
     Dialog,
     DialogTitle,
